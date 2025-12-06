@@ -4,6 +4,7 @@
  */
 
 const { chromium } = require('playwright');
+const fs = require('fs');
 const {
     parseLinkedInDate,
     formatDateForApify,
@@ -88,6 +89,12 @@ async function scrapeProfileAttempt(profileName, profileUrl) {
                 'Upgrade-Insecure-Requests': '1'
             }
         });
+
+        // Load LinkedIn cookies (required for authenticated scraping)
+        const cookiesPath = './scraper/cookies.json';
+        const cookies = JSON.parse(fs.readFileSync(cookiesPath, 'utf8'));
+        await context.addCookies(cookies);
+        console.log('✓ LinkedIn cookies loaded into browser session');
 
         const page = await context.newPage();
 

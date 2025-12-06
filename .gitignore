@@ -37,6 +37,9 @@ node_modules/
 .env.test
 .env.local
 
+# LinkedIn cookies (contains sensitive authentication tokens)
+scraper/cookies.json
+
 # Playwright
 .playwright/
 playwright-report/
